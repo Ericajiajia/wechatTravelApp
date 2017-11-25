@@ -1,0 +1,97 @@
+<!-- 账本对应时间地点和人员，菜单栏 -->
+<view class='account-summary-container'>
+	<view class='account-summary'>
+		<view class='summary-title'>
+			<text class='summary-title-content'>{{title.location}}　({{title.time}})</text>
+			<image class='summary-title-menu' background-size="cover" src='../../images/detail_title_menu.png' bindtap='showMenu'></image>
+		</view>
+		<view class='summary-users'>
+			<image class='summary-users-image' wx:for="{{title.users}}" wx:for-item="item" src='{{item.src}}'></image>
+			<image class='summary-users-icon' src='../../images/detail_add_user.png' background-size="cover" bindtap='addUser'></image>
+			<text class='summary-users-text {{textNone}}'>邀请小伙伴加入该账本</text>
+		</view>
+	</view>
+</view>
+<!-- 账本花销 -->
+<view class='account-summoney'>
+	<view class='summoney-title'>
+		<text class='summoney-title-content'>我的总花费</text>
+		<image class='summoney-title-info' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
+	</view>
+	<view class='summoney-price'>
+		<text class='summoney-price-number'>{{summoney.money}}</text>
+		<text>人民币</text>
+	</view>
+	<button class='summoney-add' bindtap='addAccount'>记一笔</button>
+</view>
+<!-- 公账、私账详情 -->
+<view class='account-sort'>
+	<view class='sort-block'>
+		<!-- 公账 -->
+		<view class='sort-public-block' bindtap='sortPublic'>
+			<text class='sort-public {{sort.selected1}}'>公账</text>
+		</view>
+		<!-- 私账 -->
+		<view class='sort-private-block' bindtap='sortPrivate'>
+			<text class='sort-private {{sort.selected2}}'>私账</text>
+		</view>
+	</view>
+	<!-- 账本明细 -->
+	<view class='bill-detail {{bill.billHave}}' wx:for="{{bill.detailShow}}" wx:for-index="index" wx:for-item="item">
+		<view>
+			<image class='detail-image' src='{{item.imageUrl}}' background-size="cover"></image>
+		</view>
+		<view class='detail-info-container'>
+			<view class='detail-info'>
+				<text class='info-sort'>{{item.sort}}</text>
+				<text class='info-time'>{{item.time}}</text>
+			</view>
+			<view class='detail-price'>
+				<text class='price-money'>{{item.price}}</text>
+				<text>人民币</text>
+			</view>
+		</view>
+		<button class='detail-button {{item.doneStyle}}'>{{item.done}}</button>
+	</view>
+	<!-- 账单无数据 -->
+	<view class='bill-none {{bill.billNone}}'>
+		<view class="none-content">{{bill.noneContent}}</view>
+	</view>
+</view>
+<!-- Info提示框 -->
+<view class='alert-background {{show0}}'>
+  <view class='alert-container'>
+    <text class='alert-content'>总花费由公账(AA制计算)和私账共同构成</text>
+    <button class='alert-confirm' bindtap='hideModal'>我知道了</button>
+  </view>
+</view>
+<!-- 菜单详细分类 -->
+<view class='menu-background {{show1}}' bindtap='hideMenu'>
+	<view class='menu-container'>
+		<!-- 切换账本 -->
+		<view class='menu-switch' catchtap='switchAccount'>
+			<image class='menu-image' src='../../images/menu_select/menu_switch.png' background-size="cover"></image>
+			<text class='menu-text'>切换账本</text>
+		</view>
+		<!-- 新建账本 -->
+		<view class='menu-new' catchtap='newAccount'>
+			<image class='menu-image' src='../../images/menu_select/menu_add.png' background-size="cover"></image>
+			<text class='menu-text'>新建账本</text>
+		</view>
+		<!-- 晒账单 -->
+		<view class='menu-show' catchtap='showAccount'>
+			<image class='menu-image' src='../../images/menu_select/menu_show.png' background-size="cover"></image>
+			<text class='menu-text'>晒账单</text>
+		</view>
+		<!-- 历史操作 -->
+		<view class='menu-history' catchtap='historyCheck'>
+			<image class='menu-image' src='../../images/menu_select/menu_history.png' background-size="cover"></image>
+			<text class='menu-text'>历史操作</text>
+		</view>
+		<!-- 上传收款码 -->
+		<view class='menu-upload' catchtap='uploadCode'>
+			<image class='menu-image' src='../../images/menu_select/menu_upload.png' background-size="cover"></image>
+			<text class='menu-text'>上传收款码</text>
+		</view>
+	</view>
+</view>

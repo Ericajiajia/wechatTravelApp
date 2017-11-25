@@ -1,0 +1,93 @@
+<!-- 账单类型 -->
+<view class='detail-sort-container'>
+	<view class='sort-title'>类型</view>
+	<view class='sort-images'>
+		<view class='sort-image-container' data-menuindex="0" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[0].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[0].imageSpecial}}'>{{sort.images[0].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="1" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[1].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[1].imageSpecial}}'>{{sort.images[1].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="2" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[2].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[2].imageSpecial}}'>{{sort.images[2].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="3" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[3].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[3].imageSpecial}}'>{{sort.images[3].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="4" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[4].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[4].imageSpecial}}'>{{sort.images[4].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="5" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[5].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[5].imageSpecial}}'>{{sort.images[5].title}}</text>
+		</view> 
+		<view class='sort-image-container' data-menuindex="6" bindtap='changeSort'>
+			<image class='sort-image' src='{{sort.images[6].imageUrl}}' background-size="cover"></image>
+			<text class='sort-image-title {{sort.images[6].imageSpecial}}'>{{sort.images[6].title}}</text>
+		</view> 
+		<view class='sort-image-container'>
+			<image class='sort-image'></image>
+			<text class='sort-image-title'></text>
+		</view> 
+	</view>
+</view>
+<!-- 账单创建时间 -->
+<view class='detail-time-container'>
+	<view class='detail-time-title' bindchange="bindDateChange">时间</view>
+	<view class='detail-time'>
+    <picker mode="date" value="{{time}}" start="2000-01-01" end="2100-12-31" bindchange="bindDateChange">
+      <view class='detail-time-button'>{{time}}</view>
+    </picker>  
+	</view>
+</view>
+<!-- 账单金额 -->
+<view class='detail-money-container'>
+	<view class='detail-money-block1' bindtap='moneyFocus'>
+		<view class='detail-money-title' bindtap='moneyFocus'>金额</view>
+		<input class='detail-money' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);'></input>
+	</view>
+	<view class='detail-money-block2'>人民币 ></view>
+</view>
+<!-- 账单备注 -->
+<view class='detail-remark-container'>
+	<view class='detail-remark-title' bindtap='remarkFocus'>备注</view>
+	<input class='detail-remark' focus='{{remarkfocus}}'></input>
+</view>
+<!-- 上传收款人二维码 -->
+<view class='detail-upload-container'>
+	<view class='detail-upload-title'>图片</view>
+	<view class='detail-upload-image'>
+		<image class='detail-upload-icon' src='{{uploadUrl}}' background-size="cover" bindtap='codeUpload'></image>
+	</view>
+</view>
+<!-- 是否公账 -->
+<view class='detail-account-container'>
+	<view class='detail-account-title'>是否公账</view>
+	<switch class='detail-account-switch' type='switch' bindchange='listenerSwitch'></switch>
+</view>
+<view class='detail-group-container {{groupNone}}'>
+	<!-- 付款人选择，只有一个 -->
+	<view class='detail-host-container'>
+		<view class='detail-host-title'>付款人</view>
+		<view class='detail-host-images'>
+			<image class='host-image' src='{{hostUrl}}'></image>
+		</view>
+		<view class='detail-host-icon'>></view>
+	</view>
+	<!-- 参与人选择，可有多人 -->
+	<view class='detail-guest-container'>
+		<view class='detail-guest-title'>参与人</view>
+		<view class='detail-guest-images'>
+			<image class='guest-image' wx:for="{{guestUrl}}" wx:for-item="item" src='{{item}}'></image>
+		</view>
+		<view class='detail-guest-icon'>></view>
+	</view>
+</view>
+<!-- 按钮 -->
+<button class='detail-finish-button'>完成</button>
+<button class='detail-delete-button'>删除</button>

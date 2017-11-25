@@ -1,0 +1,17 @@
+<view class='code-show'>
+  <image class='code-show-icon' src='{{iconUrl}}' background-size="cover" bindtap='changeInfo'></image>
+</view>
+<view class='code-info'>
+  <text class='code-info-title'>{{infoTitle}}</text>
+  <image class='code-info-icon' src='{{infoUrl}}' background-size="cover" bindtap='showModal'></image>
+</view>
+<button class='code-confirm'>确定</button>
+<!-- Info提示框 -->
+<view class='alert-background {{show0}}'>
+  <view class='alert-container'>
+    <text class='alert-question'>Q: 如何上传微信收款码?</text>
+    <text class='alert-ans1'>打开微信->点击右上角“+”->收付款->二维码收款->长按保存到相册</text>
+    <text class='alert-ans2'>在小程序首页点击头像就能互相查看收款码啦</text>
+    <button class='alert-confirm' bindtap='hideModal'>我知道了</button>
+  </view>
+</view>

@@ -1,0 +1,168 @@
+/* 记一笔页面样式 */
+/* 账单类型 */
+.detail-sort-container {
+	display: flex;
+	justify-content: space-between;
+	height: 275rpx;
+	margin: 0 auto;
+	padding: 23rpx 40rpx 25rpx;
+	box-sizing: border-box;
+	border-bottom: 1rpx solid rgba(95, 95, 95, .1);
+}
+.sort-title {
+	width: 70rpx;
+	margin-top: 21rpx;
+	margin-right: 48rpx;
+	font-size: 34rpx;
+	color: rgb(160, 160, 160);
+}
+.sort-images {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 550rpx;
+}
+.sort-image-container {
+	display: inline-flex;
+	justify-content: space-around;
+	flex-direction: column;
+	width: 64rpx;
+	height: 107rpx;
+	margin-right: 56rpx;
+	margin-bottom: 22rpx;
+}
+.sort-image {
+	width: 64rpx;
+	height: 64rpx;
+}
+.sort-image-title {
+	display: inline-block;
+	font-size: 28rpx;
+	color: rgb(160, 160, 160);
+}
+.imageSpecial {
+	color: rgb(57, 166, 255);
+}
+/* 账单创建时间 */
+.detail-time-container, .detail-money-container, .detail-remark-container, .detail-upload-container, .detail-account-container, .detail-host-container, .detail-guest-container {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	padding: 0 40rpx;
+	font-size: 34rpx;
+	color: rgb(160, 160, 160);
+	box-sizing: border-box;
+	border-bottom: 1rpx solid rgba(95, 95, 95, .1);
+}
+.detail-time-container, .detail-money-container, .detail-remark-container, .detail-account-container, .detail-guest-container, .detail-guest-title {
+	height: 120rpx;
+	line-height: 120rpx;
+}
+.detail-time-title, .detail-money-title, .detail-remark-title, .detail-account-title {
+	width: 70rpx;
+	margin-right: 42rpx;
+}
+.detail-account-title {
+	width: 140rpx;
+}
+.detail-time-button, .detail-money, .detail-remark {
+	height: 120rpx;
+	line-height: 120rpx;
+	color: rgb(95, 95, 95);
+}
+.detail-time-button, .detail-remark, .detail-upload-image {
+	width: 560rpx;
+}
+.detail-money-block1 {
+	display: flex;
+	justify-content: space-between;
+}
+.detail-money-block2 {
+	height: 120rpx;
+	line-height: 120rpx;
+}
+/* 开关按钮 */
+.detail-account-switch {
+	width: 490rpx;
+	text-align: left;
+}
+/* 图片上传栏 */
+.detail-upload-container, .detail-host-container {
+	height: 180rpx;
+	line-height: 180rpx;
+}
+.detail-upload-image {
+	text-align: left;
+	padding: 0;
+}
+.detail-upload-icon {
+	display: inline-block;
+	margin-top: 30rpx;
+	width: 120rpx;
+	height: 120rpx; 
+}
+/* 付款人,收款人选择 */
+.groupNone {
+	display: none;
+}
+.detail-host-title {
+	width: 105rpx;
+	height: 180rpx;
+	line-height: 180rpx;
+}
+.detail-guest-title {
+	width: 105rpx;
+}
+.detail-host-images {
+	width: 500rpx;
+	text-align: right;
+}
+.host-image {
+	display: inline-block;
+	margin-top: 50rpx;
+	width: 80rpx;
+	height: 80rpx;
+	border-radius: 50%;
+	background: rgba(57, 166, 255, .2);
+}
+.detail-guest-images {
+	width: 500rpx;
+	text-align: right;
+}
+.guest-image {
+	display: inline-block;
+	margin-top: 20rpx;
+	margin-left: 10rpx;
+	width: 80rpx;
+	height: 80rpx;
+	border-radius: 50%;
+	background: rgba(57, 166, 255, .2);
+}
+.detail-guest-icon, .detail-host-icon {
+	width: 35rpx;
+	text-align: center;
+	padding-right: 55rpx;
+	margin-right: -55rpx;
+}
+/* 按钮 */
+.detail-finish-button, .detail-delete-button {
+	width: 514rpx;
+	height: 80rpx;
+	line-height: 78rpx;
+	margin: 40rpx auto 0;
+	border: 3rpx solid rgb(57, 166, 255);
+	border-radius: 40rpx;
+	font-size: 34rpx;
+}
+.detail-finish-button::after, .detail-delete-button::after {
+	border: 0;
+}
+.detail-finish-button {
+	background: rgb(57, 166, 255);
+	color: #ffffff;
+}
+.detail-delete-button {
+	background: #ffffff;
+	color: rgb(57, 166, 255);
+	margin-bottom: 60rpx;
+}

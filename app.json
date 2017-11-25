@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/newDetail/newDetail",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#cccccc",
+    "navigationBarTitleText": "旅行记账-您旅行的小助手",
+    "backgroundColor": "#eeeeee",
+    "navigationBarTextStyle":"white"
+  }
+}
