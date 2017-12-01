@@ -28,8 +28,8 @@
 	flex-direction: column;
 	width: 64rpx;
 	height: 107rpx;
-	margin-right: 56rpx;
-	margin-bottom: 22rpx;
+	padding-right:28px;
+	padding-bottom:11px;
 }
 .sort-image {
 	width: 64rpx;
@@ -102,6 +102,10 @@
 	height: 120rpx; 
 }
 /* 付款人,收款人选择 */
+.detail-host-container, .detail-guest-container {
+	width: 100%;
+	overflow: hidden;
+}
 .groupNone {
 	display: none;
 }
@@ -127,22 +131,28 @@
 }
 .detail-guest-images {
 	width: 500rpx;
+	height: 120rpx;
 	text-align: right;
+	overflow: scroll;
 }
-.guest-image {
+.guest-image-con {
 	display: inline-block;
 	margin-top: 20rpx;
 	margin-left: 10rpx;
+	width: 80rpx;
+	height: 80rpx;
+}
+.guest-image {
 	width: 80rpx;
 	height: 80rpx;
 	border-radius: 50%;
 	background: rgba(57, 166, 255, .2);
 }
 .detail-guest-icon, .detail-host-icon {
-	width: 35rpx;
+	width: 30rpx;
 	text-align: center;
 	padding-right: 55rpx;
-	margin-right: -55rpx;
+	margin-right: -55rpx; 
 }
 /* 按钮 */
 .detail-finish-button, .detail-delete-button {

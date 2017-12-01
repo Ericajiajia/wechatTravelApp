@@ -3,6 +3,23 @@ const app = getApp()
 Page({
   data: {
     userInfo: {},
+		userArr: [
+			{
+				partner: '',
+				id: '54',
+				name: '风景'
+			},
+			{
+				partner: '',
+				id: '654',
+				name: '丰富'
+			},
+			{
+				partner: '',
+				id: '143',
+				name: '公司'
+			}
+		],
     accountInfo: {place: '上海', date: '2017-11-20'},
     codeInfo: '../../images/more_info.png',
     uploadIcon: '../../images/picture_upload.png',
@@ -48,9 +65,37 @@ Page({
     })
   },
   changeInfo: function () {
-    this.setData({
-      codeTitle: '点击二维码更改',
-      upload: true
-    })
-  }
+		var _this = this
+		wx.showActionSheet({
+			itemList: ['从相册中选择', '拍照'],
+			itemColor: "#000000",
+			success: function (res) {
+				if (!res.cancel) {
+					if (res.tapIndex == 0) {
+						_this.chooseWxImage('album')
+					} else if (res.tapIndex == 1) {
+						_this.chooseWxImage('camera')
+					}
+				}
+			}
+		})
+	},
+	chooseWxImage: function (type) {
+		var that = this
+		wx.chooseImage({
+			count: 1, // 默认9
+			sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+			sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有
+			success: function (res) {
+				// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+				var tempFilePaths = res.tempFilePaths
+				console.log(tempFilePaths[0])
+				that.setData({
+					codeTitle: '点击二维码更改',
+					upload: true,
+					uploadIcon: tempFilePaths[0]
+				})
+			}
+		})
+	}
 })

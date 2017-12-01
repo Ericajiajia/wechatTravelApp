@@ -5,7 +5,7 @@
   <text class='code-info-title'>{{infoTitle}}</text>
   <image class='code-info-icon' src='{{infoUrl}}' background-size="cover" bindtap='showModal'></image>
 </view>
-<button class='code-confirm'>确定</button>
+<button class='code-confirm' bindtap='codeConfirm'>确定</button>
 <!-- Info提示框 -->
 <view class='alert-background {{show0}}'>
   <view class='alert-container'>

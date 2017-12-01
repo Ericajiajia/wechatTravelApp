@@ -101,7 +101,7 @@ page {
 }
 .alert-container {
   position: relative;
-  top: 210rpx;
+  top: 250rpx;
   margin: 0 auto;
   width: 500rpx;
   height: 450rpx;

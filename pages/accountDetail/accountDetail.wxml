@@ -2,7 +2,7 @@
 <view class='account-summary-container'>
 	<view class='account-summary'>
 		<view class='summary-title'>
-			<text class='summary-title-content'>{{title.location}}　({{title.time}})</text>
+			<text class='summary-title-content' data-id="{{accountId}}">{{title.location}}　({{title.time}})</text>
 			<image class='summary-title-menu' background-size="cover" src='../../images/detail_title_menu.png' bindtap='showMenu'></image>
 		</view>
 		<view class='summary-users'>
@@ -69,27 +69,27 @@
 <view class='menu-background {{show1}}' bindtap='hideMenu'>
 	<view class='menu-container'>
 		<!-- 切换账本 -->
-		<view class='menu-switch' catchtap='switchAccount'>
+		<view class='menu-switch' bindtap='switchAccount'>
 			<image class='menu-image' src='../../images/menu_select/menu_switch.png' background-size="cover"></image>
 			<text class='menu-text'>切换账本</text>
 		</view>
 		<!-- 新建账本 -->
-		<view class='menu-new' catchtap='newAccount'>
+		<view class='menu-new' bindtap='newAccount'>
 			<image class='menu-image' src='../../images/menu_select/menu_add.png' background-size="cover"></image>
 			<text class='menu-text'>新建账本</text>
 		</view>
 		<!-- 晒账单 -->
-		<view class='menu-show' catchtap='showAccount'>
+		<view class='menu-show' bindtap='showAccount'>
 			<image class='menu-image' src='../../images/menu_select/menu_show.png' background-size="cover"></image>
 			<text class='menu-text'>晒账单</text>
 		</view>
 		<!-- 历史操作 -->
-		<view class='menu-history' catchtap='historyCheck'>
+		<view class='menu-history' bindtap='historyCheck'>
 			<image class='menu-image' src='../../images/menu_select/menu_history.png' background-size="cover"></image>
 			<text class='menu-text'>历史操作</text>
 		</view>
 		<!-- 上传收款码 -->
-		<view class='menu-upload' catchtap='uploadCode'>
+		<view class='menu-upload' bindtap='uploadCode'>
 			<image class='menu-image' src='../../images/menu_select/menu_upload.png' background-size="cover"></image>
 			<text class='menu-text'>上传收款码</text>
 		</view>

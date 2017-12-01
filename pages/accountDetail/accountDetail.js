@@ -6,7 +6,7 @@ Page({
 		title: {
 			location: '上海',
 			time: '2017-11-22',
-			users: ['']
+			users: []
 		},
 		textNone: 'textNone',
 		summoney: {
@@ -51,7 +51,8 @@ Page({
 			detailShow: []
 		},
 		show0: 'show0',
-		show1: 'show1'
+		show1: 'show1',
+		accountId: '23'
 	},
 	watch: {
 		'title.users': function (val, oldVal) {
@@ -112,13 +113,36 @@ Page({
 		})
 	},
 	// 菜单选项
-	switchAccount: function () {},
-	newAccount: function () {},
-	showAccount: function () {},
-	historyCheck: function () {},
-	uploadCode: function () {},
-	// 添加用户
-	uploadCode: function () {},
+	switchAccount: function () {
+		wx.navigateTo({
+			url: '../billsPage/billsPage'
+		})
+	},
+	newAccount: function () {
+		wx.navigateTo({
+			url: '../newAccount/newAccount'
+		})
+	},
+	showAccount: function () {
+		wx.navigateTo({
+			url: '../accountSummary/accountSummary'
+		})
+	},
+	historyCheck: function () {
+		wx.navigateTo({
+			url: '../historySearch/historySearch'
+		})
+	},
+	uploadCode: function () {
+		wx.navigateTo({
+			url: '../codeUpload/codeUpload'
+		})
+	},
+	addAccount: function () {
+		wx.navigateTo({
+			url: '../newDetail/newDetail'
+		})
+	},
 	// 公账样式设置
 	sortPublic: function () {
 		this.publicBill()

@@ -49,14 +49,14 @@
 <view class='detail-money-container'>
 	<view class='detail-money-block1' bindtap='moneyFocus'>
 		<view class='detail-money-title' bindtap='moneyFocus'>金额</view>
-		<input class='detail-money' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);'></input>
+		<input class='detail-money' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);' value='{{moneyValue}}' bindinput='getmoneyValue'></input>
 	</view>
 	<view class='detail-money-block2'>人民币 ></view>
 </view>
 <!-- 账单备注 -->
 <view class='detail-remark-container'>
 	<view class='detail-remark-title' bindtap='remarkFocus'>备注</view>
-	<input class='detail-remark' focus='{{remarkfocus}}'></input>
+	<input class='detail-remark' focus='{{remarkfocus}}' placeholder='128字以内' placeholder-style='color:rgb(160, 160, 160);' value="{{remarkValue}}" bindinput='getremarkValue'></input>
 </view>
 <!-- 上传收款人二维码 -->
 <view class='detail-upload-container'>
@@ -68,26 +68,35 @@
 <!-- 是否公账 -->
 <view class='detail-account-container'>
 	<view class='detail-account-title'>是否公账</view>
-	<switch class='detail-account-switch' type='switch' bindchange='listenerSwitch'></switch>
+	<switch class='detail-account-switch' checked='{{checked}}' type='switch' bindchange='listenerSwitch'></switch>
 </view>
 <view class='detail-group-container {{groupNone}}'>
 	<!-- 付款人选择，只有一个 -->
 	<view class='detail-host-container'>
 		<view class='detail-host-title'>付款人</view>
-		<view class='detail-host-images'>
-			<image class='host-image' src='{{hostUrl}}'></image>
+		<view class='detail-host-images' wx:for="{{hostUrl}}" wx:for-item="item">
+			<image class='host-image' src='{{item}}' data-name="{{hostName}}" data-index="{{hostIndex}}"></image>
 		</view>
-		<view class='detail-host-icon'>></view>
+		<view class='detail-host-icon' bindtap='payeeChoose'>></view>
 	</view>
 	<!-- 参与人选择，可有多人 -->
 	<view class='detail-guest-container'>
 		<view class='detail-guest-title'>参与人</view>
 		<view class='detail-guest-images'>
-			<image class='guest-image' wx:for="{{guestUrl}}" wx:for-item="item" src='{{item}}'></image>
+			<scroll-view wx:if="{{guestUrl.length > 4}}" scroll-x style="height: 120rpx;white-space: nowrap;display: flex;">
+				<view class='guest-image-con' wx:for="{{guestInfo}}" wx:for-item="item" wx:for-index="index">
+					<image class='guest-image' src='{{item.imageUrl}}' data-name="{{item.userName}}" data-index="{{item.sortNumber}}"></image>
+				</view>
+			</scroll-view>
+			<view wx:else style='width: 100%;height: 120rpx;'>
+				<view class='guest-image-con' wx:for="{{guestInfo}}" wx:for-item="item">
+					<image class='guest-image' src='{{item.imageUrl}}' data-name="{{item.userName}}" data-index="{{item.sortNumber}}"></image>
+				</view>
+			</view>
 		</view>
-		<view class='detail-guest-icon'>></view>
+		<view class='detail-guest-icon' bindtap='payerChoose'>></view>
 	</view>
 </view>
 <!-- 按钮 -->
-<button class='detail-finish-button'>完成</button>
-<button class='detail-delete-button'>删除</button>
+<button class='detail-finish-button' bindtap='finishForm'>完成</button>
+<button class='detail-delete-button' bindtap='deleteForm'>删除</button>

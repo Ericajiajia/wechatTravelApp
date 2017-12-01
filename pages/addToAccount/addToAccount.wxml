@@ -7,9 +7,7 @@
 <view>
   <text class='body-participants'>其他参与的小伙伴</text>
   <view class='body-participants-members'>
-    <image class='participants-member' src="{{}}" background-size="cover"></image>
-    <image class='participants-member' src="{{}}" background-size="cover"></image>
-    <image class='participants-member' src="{{}}" background-size="cover"></image>
+    <image class='participants-member' wx:for="{{userArr}}" wx:for-item="item" src="{{item.partner}}" id="{{item.id}}" data-name="{{item.name}}" background-size="cover"></image>
   </view>
 </view>
 <view>

@@ -3,9 +3,10 @@ const app = getApp()
 Page({
   data: {
     head_picture_url: '../../images/head_container_picture.png',
-    dates: '请输入旅行时间',
+    dates: '请选择旅行时间',
     active1: '',
-    accountInfo: {}
+    accountInfo: {},
+		locationFocus: false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -16,6 +17,11 @@ Page({
   },
   getUserInfo: function (e) {   
   },
+	locationFocus: function () {
+		this.setData({
+			locationFocus: true
+		})
+	},
   bindDateChange: function (e) {
     console.log(e.detail.value)
     this.setData({

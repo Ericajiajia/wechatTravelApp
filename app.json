@@ -1,12 +1,19 @@
 {
   "pages":[
-    "pages/newDetail/newDetail",
-    "pages/logs/logs"
+		"pages/accountDetail/accountDetail",
+		"pages/newAccount/newAccount",
+    "pages/billsPage/billsPage",
+		"pages/payerSelect/payerSelect",
+		"pages/payeeSelect/payeeSelect",
+		"pages/historySearch/historySearch",
+		"pages/codeUpload/codeUpload",
+		"pages/accountSummary/accountSummary",
+		"pages/newDetail/newDetail"
   ],
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#cccccc",
-    "navigationBarTitleText": "旅行记账-您旅行的小助手",
+    "navigationBarTitleText": "weBill",
     "backgroundColor": "#eeeeee",
     "navigationBarTextStyle":"white"
   }
