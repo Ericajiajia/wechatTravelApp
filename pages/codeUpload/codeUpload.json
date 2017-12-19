@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "上传二维码",
-  "navigationBarBackgroundColor": "rgb(57, 166, 255)",
-  "navigationBarTextStyle": "white"
+	"navigationBarBackgroundColor": "#39a6ff",
+	"navigationBarTitleText": "上传二维码",
+	"navigationBarTextStyle": "#ffffff",
+	"backgroundTextStyle": "light",
+	"backgroundColor": "#efeff4"
 }

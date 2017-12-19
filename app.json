@@ -11,10 +11,10 @@
 		"pages/newDetail/newDetail"
   ],
   "window":{
-    "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#cccccc",
-    "navigationBarTitleText": "weBill",
-    "backgroundColor": "#eeeeee",
-    "navigationBarTextStyle":"white"
+		"navigationBarBackgroundColor": "#39a6ff",
+		"navigationBarTitleText": "旅行账本",
+		"navigationBarTextStyle": "#ffffff",
+		"backgroundTextStyle": "light",
+		"backgroundColor": "#efeff4"
   }
 }

@@ -16,6 +16,7 @@
 	height: 650rpx;
 	margin: 0 auto;
 	margin-left: -10rpx;
+	background-color: #ffffff;
 }
 .summary-sum-container {
 	display: flex;
@@ -57,7 +58,6 @@
 	height: 90rpx;
 	line-height: 90rpx;
 	display: flex;
-	justify-content: space-between;
 	margin-bottom: 20rpx;
 	font-size: 34rpx;
 }
@@ -81,12 +81,13 @@
 .block-remark {
 	height: 90rpx;
 	line-height: 90rpx;
-	width: 360rpx;
+	width: 340rpx;
 	color: rgb(160, 160, 160);
 	overflow: scroll;
 }
 .block-money {
 	color: rgb(95, 95, 95);
+	margin-left: 20rpx;
 }
 .summary-button {	
 	width: 500rpx;

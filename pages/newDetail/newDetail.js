@@ -31,9 +31,10 @@ Page({
 				'../../images/sort_select/other_yes.png'
 			]
 		},
+		menuIndex: -1,
 		uploadUrl: '../../images/picture_upload.png',
 		time: '',
-		moneyValue: '',
+		moneyValue: null,
 		remarkValue: '',
 		hostUrl: [],
 		hostName: '',
@@ -42,7 +43,7 @@ Page({
 		remarkfocus: false,
 		moneyfocus: false,
 		groupNone: 'groupNone',
-		checked: false
+		checked: true
 	},
 	onLoad: function () {
 		this.setData({
@@ -69,22 +70,24 @@ Page({
 	},
 	// 选择账本类型
 	changeSort: function (e) {
-		console.log(this.data.sort.images.length)
+		console.log(e.currentTarget.dataset.menuindex)
 		var that = this
 		var url, special, sort = {}
-		for (var i = 0; i < 7; i ++) {
+		that.setData({
+			menuIndex: e.currentTarget.dataset.menuindex
+		})
+		// 账单选择类型复原
+		for (var i = 0; i < 7; i++) {
 			url = 'sort.images[' + i + '].imageUrl'
 			special = 'sort.images[' + i + '].imageSpecial'
-			if (i == e.currentTarget.dataset.menuindex) {
+			sort[url] = that.data.sort.imageUnSelect[i]
+			sort[special] = ''
+			if (i == that.data.menuIndex) {
 				console.log(i)
 				sort[url] = that.data.sort.imageSelect[i]
 				sort[special] = 'imageSpecial'
-				that.setData(sort)
-			} else {
-				sort[url] = that.data.sort.imageUnSelect[i]
-				sort[special] = ''
-				that.setData(sort)
 			}
+			that.setData(sort)
 		}
 	},
 	// 时间选择
@@ -130,10 +133,33 @@ Page({
 			success: function (res) {
 				// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
 				var tempFilePaths = res.tempFilePaths
-				console.log(tempFilePaths[0])
+				console.log(res)
 				that.setData({
 					uploadUrl: tempFilePaths[0]
 				})
+				that.uploadImage(res, tempFilePaths[0])
+			}
+		})
+	},
+	uploadImage: function (res, url) {
+		let that = this
+		console.log(url)
+		wx.uploadFile({
+			url: "https://account.hustonline.net/api/v1/images/bills/",
+			method: 'POST',
+			filePath: res.tempFilePaths[0],
+			name: 'file',
+			header: {
+				"Content-Type": "multipart/form-data"
+			},
+			formData: {
+				'bill': res.tempFiles[0]
+			},
+			success: res => {
+				console.log(res)
+			},
+			fail: e => {
+				console.log(e)
 			}
 		})
 	},
@@ -159,12 +185,39 @@ Page({
 		})
 	},
 	finishForm: function () {
-		var form = {}
-	},
+		var that = this
+		if (that.data.menuIndex == -1){
+			that.data.menuIndex = 1
+		}
+		wx.request({
+			url: 'https://account.hustonline.net/api/v1/account_books/2/bills/private/',
+			method: 'POST',
+			data: {
+				"category": that.data.sort.images[that.data.menuIndex].title,
+				"image": "",
+				"note": that.data.remarkValue,
+				"sum": that.data.moneyValue,
+				"time": that.data.time
+			},
+			header: {
+				'Content-Type': 'application/json'
+			}, 
+			success: res => {
+				console.log('success:', res)
+				wx.navigateBack({
+					delta: 1
+				})
+			},
+			fail: res => {
+				console.log('failed:', res)
+			}
+		})
+	}, 
 	// 清除表单数据
 	deleteForm: function () {
 		var that = this
 		var url, special, sort = {}
+		// 账单选择类型复原
 		for (var i = 0; i < 7; i++) {
 			url = 'sort.images[' + i + '].imageUrl'
 			special = 'sort.images[' + i + '].imageSpecial'
@@ -174,13 +227,14 @@ Page({
 		}
 		console.log(this.data.remarkValue, this.data.moneyValue)
 		that.setData({
+			menuIndex: -1,
 			uploadUrl: '../../images/picture_upload.png',
 			time: this.getCurrentTime(),
 			hostUrl: [],
 			hostName: '',
 			hostIndex: -1,
 			remarkValue: '',
-			moneyValue: '',
+			moneyValue: null,
 			guestInfo: [],
 			remarkfocus: false,
 			moneyfocus: false,

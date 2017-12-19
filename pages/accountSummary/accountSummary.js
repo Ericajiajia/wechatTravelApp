@@ -65,9 +65,9 @@ Page({
 				data: 80,
 				stroke: 'rgb(246, 157, 99)'
 			}, {
-				name: '购物',
+					name: '其他',
 				data: 40,
-				stroke: 'rgb(174, 213, 129)'
+				stroke: 'rgb(171, 190, 246)'
 			}, {
 				name: '订票',
 				data: 15,
@@ -77,13 +77,35 @@ Page({
 				data: 45,
 				stroke: 'rgb(214, 178, 51)'
 			}, {
-				name: '其他',
+					name: '购物',
 				data: 100,
-				stroke: 'rgb(171, 190, 246)'
+				stroke: 'rgb(174, 213, 129)'
 			}],
 			disablePieStroke: true,
 			width: 375,
 			height: 310
 		})
+	},
+	outputImage: function () {
+		console.log('start screenshot')
+		wx.canvasToTempFilePath({
+			x: 0,
+			y: 0,
+			canvasId: 'ringCanvas',
+			success: function (res) {
+				console.log(res.tempFilePath)
+					wx.saveImageToPhotosAlbum({
+						filePath: res.tempFilePath,
+						success: function (res) {
+							console.log('save successfully', res)
+						},
+						fail: function (res) {
+							console.log(res)
+							console.log('fail')
+						}
+					})
+			}
+		})
 	}
 })
+

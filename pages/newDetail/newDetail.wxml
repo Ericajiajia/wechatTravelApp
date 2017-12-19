@@ -49,9 +49,9 @@
 <view class='detail-money-container'>
 	<view class='detail-money-block1' bindtap='moneyFocus'>
 		<view class='detail-money-title' bindtap='moneyFocus'>金额</view>
-		<input class='detail-money' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);' value='{{moneyValue}}' bindinput='getmoneyValue'></input>
+		<input class='detail-money' type='digit' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);' value='{{moneyValue}}' bindinput='getmoneyValue'></input>
 	</view>
-	<view class='detail-money-block2'>人民币 ></view>
+	<view class='detail-money-block2'>人民币</view>
 </view>
 <!-- 账单备注 -->
 <view class='detail-remark-container'>

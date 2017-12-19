@@ -1,5 +1,7 @@
 {
+	"navigationBarBackgroundColor": "#39a6ff",
 	"navigationBarTitleText": "旅行账本",
-	"navigationBarBackgroundColor": "rgb(57, 166, 255)",
-	"navigationBarTextStyle": "white"
+	"navigationBarTextStyle": "#ffffff",
+	"backgroundTextStyle": "light",
+	"backgroundColor": "#efeff4"
 }

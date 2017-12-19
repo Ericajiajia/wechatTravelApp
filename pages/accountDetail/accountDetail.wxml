@@ -6,8 +6,10 @@
 			<image class='summary-title-menu' background-size="cover" src='../../images/detail_title_menu.png' bindtap='showMenu'></image>
 		</view>
 		<view class='summary-users'>
-			<image class='summary-users-image' wx:for="{{title.users}}" wx:for-item="item" src='{{item.src}}'></image>
-			<image class='summary-users-icon' src='../../images/detail_add_user.png' background-size="cover" bindtap='addUser'></image>
+			<image class='summary-users-image' wx:for="{{title.users}}" wx:for-item="item" src='{{item.avatarUrl}}' data-name='{{item.nickName}}' data-id='{{item.id}}'></image>
+			<button class='users-icon-button' open-type='share'>
+				<image class='summary-users-icon' src='../../images/detail_add_user.png' background-size="cover" bindtap='addUser'></image>
+			</button>
 			<text class='summary-users-text {{textNone}}'>邀请小伙伴加入该账本</text>
 		</view>
 	</view>
@@ -19,7 +21,7 @@
 		<image class='summoney-title-info' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
 	</view>
 	<view class='summoney-price'>
-		<text class='summoney-price-number'>{{summoney.money}}</text>
+		<text class='summoney-price-number'>{{summoney}}</text>
 		<text>人民币</text>
 	</view>
 	<button class='summoney-add' bindtap='addAccount'>记一笔</button>
@@ -51,7 +53,7 @@
 				<text>人民币</text>
 			</view>
 		</view>
-		<button class='detail-button {{item.doneStyle}}'>{{item.done}}</button>
+		<button class='detail-button {{visible}} {{item.doneStyle}}'>{{item.done}}</button>
 	</view>
 	<!-- 账单无数据 -->
 	<view class='bill-none {{bill.billNone}}'>
@@ -69,29 +71,29 @@
 <view class='menu-background {{show1}}' bindtap='hideMenu'>
 	<view class='menu-container'>
 		<!-- 切换账本 -->
-		<view class='menu-switch' bindtap='switchAccount'>
+		<navigator class='menu-switch' open-type="navigate" url='../billsPage/billsPage?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_switch.png' background-size="cover"></image>
 			<text class='menu-text'>切换账本</text>
-		</view>
+		</navigator>
 		<!-- 新建账本 -->
-		<view class='menu-new' bindtap='newAccount'>
+		<navigator class='menu-new' open-type="navigate" url="../newAccount/newAccount?title=navigate">
 			<image class='menu-image' src='../../images/menu_select/menu_add.png' background-size="cover"></image>
 			<text class='menu-text'>新建账本</text>
-		</view>
+		</navigator>
 		<!-- 晒账单 -->
-		<view class='menu-show' bindtap='showAccount'>
+		<navigator class='menu-show' open-type="navigate" url='../accountSummary/accountSummary?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_show.png' background-size="cover"></image>
 			<text class='menu-text'>晒账单</text>
-		</view>
+		</navigator>
 		<!-- 历史操作 -->
-		<view class='menu-history' bindtap='historyCheck'>
+		<navigator class='menu-history' open-type="navigate" url='../historySearch/historySearch?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_history.png' background-size="cover"></image>
 			<text class='menu-text'>历史操作</text>
-		</view>
+		</navigator>
 		<!-- 上传收款码 -->
-		<view class='menu-upload' bindtap='uploadCode'>
+		<navigator class='menu-upload' open-type="navigate" url='../codeUpload/codeUpload?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_upload.png' background-size="cover"></image>
 			<text class='menu-text'>上传收款码</text>
-		</view>
+		</navigator>
 	</view>
 </view>
