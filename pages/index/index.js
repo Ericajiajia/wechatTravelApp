@@ -3,6 +3,26 @@
 const app = getApp()
 
 Page({
+	onShow: function () {
+		wx.showLoading({
+			title: 'loading...'
+		})
+		this.time()
+	},
+	time: function () {
+		// let timeout = setInterval(function () {
+		// 	console.log(5453)
+		// 	if (wx.getStorageSync('session')) {
+				setTimeout(function () {
+					wx.hideLoading()
+					// clearInterval(timeout)
+					wx.redirectTo({
+						url: '../accountDetail/accountDetail',
+					})
+				}, 2000)
+		// 	}
+		// }, 500)
+	}
   // data: {
   //   motto: 'Hello World',
   //   userInfo: {},

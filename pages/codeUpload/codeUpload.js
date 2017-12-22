@@ -1,36 +1,37 @@
 const app = getApp()
-
 Page({
   data: {
-    infoUrl: '../../images/more_info.png',
     iconUrl: '../../images/picture_upload.png',
-    infoTitle: '上传你的收款二维码便于小伙伴支付哦',
     show0: 'show0',
-    upload: false
+		codeInfo: '上传二维码',
+    upload: false,
+		forbidden: 'forbidden',
+		infoShow: 0
   },
 	onShow: function () {
-		if (this.data.iconUrl.match('picture_upload')) {
-			this.setData({
-				upload: false,
-				infoTitle: '上传你的收款二维码便于小伙伴支付哦'
-			})
-		}
-		if (this.data.upload) {
-			this.setData({
-				infoTitle: '点击二维码更改'
-			})
-		}
+		let that = this
+		wx.request({
+			url: app.globalData.publicPath + '/api/v1/users/' + app.globalData.id + '/',
+			method: 'GET',
+			header: {
+				'content-type': 'application/json'
+			},
+			success: res => {
+				console.log('res:', res)
+				if (!res.data.qrCode) {
+					that.setData({
+						codeInfo: '上传二维码',
+						upload: false
+					})
+				} else {
+					that.setData({
+						codeInfo: '修改二维码',
+						upload: true
+					})
+				}
+			},
+		})
 	},
-  showModal: function () {
-    this.setData({
-      show0: ''
-    })
-  },
-  hideModal: function () {
-    this.setData({
-      show0: 'show0'
-    })
-  },
   changeInfo: function () {
 		var _this = this
 		wx.showActionSheet({
@@ -55,19 +56,75 @@ Page({
 			sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有
 			success: function (res) {
 				// 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-				var tempFilePaths = res.tempFilePaths
-				console.log(tempFilePaths[0])
+				var tempFilePaths = res.tempFilePaths[0]
 				that.setData({
-					infoTitle: '点击二维码更改',
-					upload: true,
-					iconUrl: tempFilePaths[0]
+					iconUrl: tempFilePaths
 				})
+				console.log(that.data.iconUrl)
+			}
+		})
+	},
+	uploadImage: function (url) {
+		let that = this
+		wx.uploadFile({
+			url: app.globalData.publicPath + "/api/v1/images/qrcodes/",
+			filePath: url,
+			name: 'qrcode',
+			header: {
+				"Content-Type": "multipart/form-data"
+			},
+			formData: {
+				'qrcode': url
+			},
+			success: res => {
+				if (res.statusCode == 200) {
+					console.log(res)
+					that.setData({
+						codeInfo: '修改二维码',
+						upload: true,
+						infoShow: 0,
+					})
+					wx.showToast({
+						title: '上传成功',
+						duration: 1000,
+						success: res => {
+							setTimeout(function () {
+								wx.navigateBack({
+									delta: 1
+								})
+							}, 1500)
+						}
+					})
+				} else {
+					that.setData({
+						codeInfo: '修改二维码',
+						upload: false,
+						infoShow: 1,
+					})
+				}
+				console.log(res)
+			},
+			fail: e => {
+				console.log(e)
 			}
 		})
 	},
 	codeConfirm: function () {
-		wx.navigateBack({
-			delta: 1,
+		console.log(this.data.iconUrl)
+		if (!this.data.iconUrl.match('../../images/picture_upload')) {
+			this.uploadImage(this.data.iconUrl)
+		} else {
+			return
+		}
+	},
+	showModal: function () {
+		this.setData({
+			show0: ''
+		})
+	},
+	hideModal: function () {
+		this.setData({
+			show0: 'show0'
 		})
 	}
 })

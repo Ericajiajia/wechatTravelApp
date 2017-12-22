@@ -72,15 +72,15 @@
 </view>
 <view class='detail-group-container {{groupNone}}'>
 	<!-- 付款人选择，只有一个 -->
-	<view class='detail-host-container'>
+	<view class='detail-host-container' bindtap='payeeChoose'>
 		<view class='detail-host-title'>付款人</view>
 		<view class='detail-host-images' wx:for="{{hostUrl}}" wx:for-item="item">
 			<image class='host-image' src='{{item}}' data-name="{{hostName}}" data-index="{{hostIndex}}"></image>
 		</view>
-		<view class='detail-host-icon' bindtap='payeeChoose'>></view>
+		<view class='detail-host-icon'>></view>
 	</view>
 	<!-- 参与人选择，可有多人 -->
-	<view class='detail-guest-container'>
+	<view class='detail-guest-container' bindtap='payerChoose'>
 		<view class='detail-guest-title'>参与人</view>
 		<view class='detail-guest-images'>
 			<scroll-view wx:if="{{guestUrl.length > 4}}" scroll-x style="height: 120rpx;white-space: nowrap;display: flex;">
@@ -94,7 +94,7 @@
 				</view>
 			</view>
 		</view>
-		<view class='detail-guest-icon' bindtap='payerChoose'>></view>
+		<view class='detail-guest-icon'>></view>
 	</view>
 </view>
 <!-- 按钮 -->

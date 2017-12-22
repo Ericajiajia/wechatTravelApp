@@ -10,6 +10,7 @@ App({
 		nickName: '',
 		avatarUrl: '',
 		gender: 0,
+		id: 0,
 		publicPath: 'https://account.hustonline.net',
 		accountbookId: 2,
 		users: []
@@ -26,7 +27,7 @@ App({
 			success: function (res) {
 				if (res.code) {
 					var code = res.code
-					console.log('code:', code)
+					// console.log('code:', code)
 					// 获取用户信息
 					wx.getUserInfo({
 						withCredentials: true,
@@ -39,8 +40,9 @@ App({
 							var iv = res.iv
 							var signature = res.signature
 							var encryptedData = res.encryptedData
-							console.log('全局变量:', that.globalData)
-							console.log(res)
+							// console.log(res)
+							// console.log('全局变量:', that.globalData)
+							// console.log(res)
 							// post请求
 							wx.request({
 								url: `${sourceSettings.publicPath}/api/v1/users/`,
@@ -49,7 +51,7 @@ App({
 									"code": code
 								},
 								success: function (data) {
-									console.log('post请求结果:', data)
+									// console.log('post请求结果:', data)
 									wx.setStorageSync('session', data.data.session)
 									var sessionData = wx.getStorageSync('session')
 									console.log(sessionData)
@@ -66,13 +68,19 @@ App({
 											'encryptedData': encryptedData
 										},
 										success: res => {
-											console.log('putRes:', res)
+											// console.log('putRes:', res)
+											that.globalData.id = res.data.id
+											console.log('用户id：', res.data.id)
 											wx.request({
 												url: `${sourceSettings.publicPath}/api/v1/account_books/` + that.globalData.accountbookId + `/`,
 												method: 'GET',
+												header: {
+													'3rd-session': sessionData
+												},
 												success: res => {
 													// 获取当前账本参与者信息
 													that.globalData.users = res.data.participants
+													console.log(res.data)
 												}
 											})
 										}

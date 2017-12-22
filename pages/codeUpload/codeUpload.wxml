@@ -1,10 +1,14 @@
 <view class='code-show'>
-  <image class='code-show-icon' src='{{iconUrl}}' background-size="cover" bindtap='changeInfo'></image>
+  <image class='code-show-icon' src='{{iconUrl}}' background-size="cover"></image>
 </view>
-<view class='code-info'>
-  <text class='code-info-title'>{{infoTitle}}</text>
-  <image class='code-info-icon' src='{{infoUrl}}' background-size="cover" bindtap='showModal'></image>
+<view class='code-info' wx:if='{{infoShow == 0}}'>
+  <text class='code-info-title'>上传你的收款二维码便于小伙伴支付哦</text>
+  <image class='code-info-icon' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
 </view>
+<view class='code-error-info' wx:else>
+	<text class='code-error-title'>抱歉！图片上传失败，请重新上传</text>
+</view>
+<button class='code-change' bindtap='changeInfo'>{{codeInfo}}</button>
 <button class='code-confirm' bindtap='codeConfirm'>确定</button>
 <!-- Info提示框 -->
 <view class='alert-background {{show0}}'>

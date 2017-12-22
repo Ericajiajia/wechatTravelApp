@@ -21,8 +21,7 @@
 		<image class='summoney-title-info' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
 	</view>
 	<view class='summoney-price'>
-		<text class='summoney-price-number'>{{summoney}}</text>
-		<text>人民币</text>
+		<text class='summoney-price-number'>{{summoney}}</text>人民币
 	</view>
 	<button class='summoney-add' bindtap='addAccount'>记一笔</button>
 </view>
@@ -38,9 +37,9 @@
 			<text class='sort-private {{sort.selected2}}'>私账</text>
 		</view>
 	</view>
-	<!-- 账本明细 -->
-	<view class='bill-detail {{bill.billHave}}' wx:for="{{bill.detailShow}}" wx:for-index="index" wx:for-item="item">
-		<view>
+	<!-- 公账明细 -->
+	<view class='bill-detail {{billHave[0]}}' wx:for="{{detailShow1}}" wx:for-index="index" wx:for-item="item" data-id='{{item.id}}' bindtap='changeBill'>
+		<view class='detail-image-container'> 
 			<image class='detail-image' src='{{item.imageUrl}}' background-size="cover"></image>
 		</view>
 		<view class='detail-info-container'>
@@ -49,15 +48,38 @@
 				<text class='info-time'>{{item.time}}</text>
 			</view>
 			<view class='detail-price'>
-				<text class='price-money'>{{item.price}}</text>
-				<text>人民币</text>
+				<text class='price-money'>{{item.pricePer}}</text>
+				<text class='price-detail'>共{{item.participantsNum}}人消费{{item.price}}元</text>
 			</view>
 		</view>
-		<button class='detail-button {{visible}} {{item.doneStyle}}'>{{item.done}}</button>
+		<!-- 公账四种形式 -->
+		<view class='detail-four-condition'>
+			<button class='detail-button undone' data-id='{{item.id}}' data-listid='{{index}}' wx:if="{{item.visible == 0}}" catchtap='chooseHurry'>催账</button>
+			<button class='detail-button done' wx:elif="{{item.visible == 1}}">已结清</button>
+			<view class='detail-favicon' wx:elif="{{item.visible == 2}}">
+				<image class='favicon-image' src='{{item.userImage}}' background-size="cover"></image>
+				<view class='favicon-before {{item.beforeRound}}'>已支付</view>
+			</view>
+		</view>
+	</view>
+	<!-- 私账明细 -->
+	<view class='bill-detail {{billHave[1]}}' wx:for="{{detailShow2}}" wx:for-index="index" wx:for-item="item" data-id='{{item.id}}' bindtap='changeBill'>
+		<view class='detail-image-container'>
+			<image class='detail-image' src='{{item.imageUrl}}' background-size="cover"></image>
+		</view>
+		<view class='detail-info-container'>
+			<view class='detail-info'>
+				<text class='info-sort'>{{item.sort}}</text>
+				<text class='info-time'>{{item.time}}</text>
+			</view>
+			<view class='detail-price-private'>
+				<text class='price-money'>{{item.price}}</text>人民币
+			</view>
+		</view>
 	</view>
 	<!-- 账单无数据 -->
-	<view class='bill-none {{bill.billNone}}'>
-		<view class="none-content">{{bill.noneContent}}</view>
+	<view class='bill-none {{billNone}}'>
+		<view class="none-content">{{noneContent}}</view>
 	</view>
 </view>
 <!-- Info提示框 -->
@@ -68,32 +90,31 @@
   </view>
 </view>
 <!-- 菜单详细分类 -->
-<view class='menu-background {{show1}}' bindtap='hideMenu'>
-	<view class='menu-container'>
+<view class='menu-background {{show1}}' bindtap='hideMenu'></view>
+	<view class='menu-container {{show1}}'>
 		<!-- 切换账本 -->
-		<navigator class='menu-switch' open-type="navigate" url='../billsPage/billsPage?title=navigate'>
+		<navigator class='menu-switch' open-type="navigate" bindtap='closeMenu' url='../billsPage/billsPage?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_switch.png' background-size="cover"></image>
 			<text class='menu-text'>切换账本</text>
 		</navigator>
 		<!-- 新建账本 -->
-		<navigator class='menu-new' open-type="navigate" url="../newAccount/newAccount?title=navigate">
+		<navigator class='menu-new' open-type="navigate" bindtap='closeMenu' url="../newAccount/newAccount?title=navigate">
 			<image class='menu-image' src='../../images/menu_select/menu_add.png' background-size="cover"></image>
 			<text class='menu-text'>新建账本</text>
 		</navigator>
 		<!-- 晒账单 -->
-		<navigator class='menu-show' open-type="navigate" url='../accountSummary/accountSummary?title=navigate'>
+		<navigator class='menu-show' open-type="navigate" bindtap='closeMenu' url='../accountSummary/accountSummary?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_show.png' background-size="cover"></image>
 			<text class='menu-text'>晒账单</text>
 		</navigator>
 		<!-- 历史操作 -->
-		<navigator class='menu-history' open-type="navigate" url='../historySearch/historySearch?title=navigate'>
+		<navigator class='menu-history' open-type="navigate" bindtap='closeMenu' url='../historySearch/historySearch?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_history.png' background-size="cover"></image>
 			<text class='menu-text'>历史操作</text>
 		</navigator>
 		<!-- 上传收款码 -->
-		<navigator class='menu-upload' open-type="navigate" url='../codeUpload/codeUpload?title=navigate'>
+		<navigator class='menu-upload' open-type="navigate" bindtap='closeMenu' url='../codeUpload/codeUpload?title=navigate'>
 			<image class='menu-image' src='../../images/menu_select/menu_upload.png' background-size="cover"></image>
 			<text class='menu-text'>上传收款码</text>
 		</navigator>
 	</view>
-</view>

@@ -1,5 +1,4 @@
 const app = getApp()
-
 Page({
 	data: {
 		sort: {
@@ -42,7 +41,7 @@ Page({
 		guestInfo: [],
 		remarkfocus: false,
 		moneyfocus: false,
-		groupNone: 'groupNone',
+		groupNone: '',
 		checked: true
 	},
 	onLoad: function () {
@@ -145,10 +144,10 @@ Page({
 		let that = this
 		console.log(url)
 		wx.uploadFile({
-			url: "https://account.hustonline.net/api/v1/images/bills/",
+			url: app.globalData.publicPath + "/api/v1/images/bills/",
 			method: 'POST',
 			filePath: res.tempFilePaths[0],
-			name: 'file',
+			name: 'bill',
 			header: {
 				"Content-Type": "multipart/form-data"
 			},
@@ -196,7 +195,7 @@ Page({
 				"category": that.data.sort.images[that.data.menuIndex].title,
 				"image": "",
 				"note": that.data.remarkValue,
-				"sum": that.data.moneyValue,
+				"sum": that.checkSum(that.data.moneyValue),
 				"time": that.data.time
 			},
 			header: {
@@ -213,6 +212,13 @@ Page({
 			}
 		})
 	}, 
+	checkSum: function (sum) {
+		if (!sum || !isNaN(sum)) {
+			return 0
+		} else {
+			return sum * 100
+		}
+	},
 	// 清除表单数据
 	deleteForm: function () {
 		var that = this

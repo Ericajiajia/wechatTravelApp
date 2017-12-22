@@ -11,6 +11,7 @@
 	margin: 0 auto;
 	padding: 30rpx 20rpx 40rpx;
 	box-sizing:border-box;
+	box-shadow:0 0 18rpx 4rpx rgb(227, 227, 227);
 }
 .summary-title {
 	width: 670rpx;
@@ -41,6 +42,7 @@
 	height: 90rpx;
 	margin-right: 10rpx;
 	border-radius: 50%;
+	overflow: hidden;
 }
 .summary-users-icon {
 	width: 100%;
@@ -135,68 +137,111 @@
 	border-bottom: 4rpx solid rgb(57, 166, 255);
 	box-sizing: border-box;
 }
+
+
+
 /* 渲染账单数据 */
 .bill-detail {
+	position: relative;
+	top: 0;
+	left: 0;
 	width: 670rpx;
 	margin: 0 auto;
 	padding: 0;
 	height: 130rpx;
 	line-height: 130rpx;
 	box-sizing: border-box;
-	display: flex;
-	justify-content: space-between;
 	border-bottom: 1rpx solid rgba(95, 95, 95, .2);
 }
 .billHave {
 	display: none;
 }
+.detail-image-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	height: 130rpx;
+	width: 80rpx;
+	padding: 25rpx 0;
+	box-sizing: border-box;
+}
 .detail-image {
 	width: 80rpx;
 	height: 80rpx;
-	margin-top: 25rpx;
-	margin-right: 30rpx;
 }
 .detail-info-container {
-	display: flex;
-	justify-content: space-between;
-	margin-left: -90rpx;
+	position: absolute;
+	top: 0;
+	left: 100rpx;
+	display: inline-block;
+	height: 130rpx;
+	width: 430rpx;
+	text-align: left;
 }
-.detail-info {
-	line-height: 0;
-	padding: 25rpx 0;
-	width: 180rpx;
-	margin-right: 14rpx;
-	display: inline-flex;
-	flex-direction: column;
-	justify-content: space-around;
-	box-sizing: border-box;
-	color: rgb(95, 95, 95);
+.detail-info, .detail-price {
+	position: absolute;
+	top: 0;
+	height: 130rpx;
 	font-size: 30rpx;
+	color: rgb(95, 95, 95);
+	display: inline-flex;
+	justify-content: space-between;
+	flex-direction: column;
+	padding: 25rpx 0;
+	box-sizing: border-box;
 }
-.info-time, .info-sort {
-	height: 34rpx;
-	line-height: 34rpx;
-	text-align: center;
-}
-.info-time {
-	color: rgb(160, 160, 160);
-}
-.detail-price {
+.detail-price-private {
+	position: absolute;
+	top: 0;
+	height: 130rpx;
+	line-height: 130rpx;
 	font-size: 24rpx;
 	color: rgb(95, 95, 95);
+	padding: 0;
+	box-sizing: border-box;
+}
+.detail-info {
+	left: 0;
+	width: 185rpx;
+}
+.info-time, .price-detail {
+	font-size: 24rpx;
+	color: rgb(160, 160, 160);
+}
+.info-sort, .info-time, .price-money, .price-detail {
+	display: inline-block;
+	height: 34rpx;
+	line-height: 34rpx;
 }
 .price-money {
-	font-size: 32rpx;
+	font-size: 30rpx;
+}
+.detail-price, .detail-price-private {
+	left: 190rpx;
+	width: auto;
+}
+.detail-four-condition {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-block;
+	width: 140rpx;
+	height: 130rpx;
+	line-height: 130rpx;
+	box-sizing: border-box;
 }
 .detail-button {
 	width: 130rpx;
 	height: 60rpx;
-	margin: 35rpx 0;
+	display: inline-block;
+	margin: 35rpx 0 35rpx 10rpx;
 	padding: 0;
 	line-height: 60rpx;
 	border-radius: 8rpx;
 	background: #ffffff;
 	font-size: 28rpx;
+	text-align: center;
 }
 .detail-button::after {
 	border: 0;
@@ -212,6 +257,38 @@
 .visible {
 	visibility: hidden;
 }
+ .detail-favicon {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: inline-block;
+	margin: 20rpx 25rpx;
+	width: 90rpx;
+	height: 90rpx;
+}
+.favicon-image, .favicon-before {
+	width: 90rpx;
+	height: 90rpx;
+	border-radius: 50%;
+}
+.favicon-before {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	line-height: 90rpx;
+	background: rgba(255, 255, 255, .5);
+	font-size: 22rpx;
+	color: #ffffff;
+	text-align: center;
+} 
+
+
+
+
+
+
+
 /* 账单无数据 */
 .bill-none {
 	margin: 0 auto;
@@ -273,7 +350,8 @@
 }
 /* 菜单详细分类 */
 .menu-container {
-	position: absolute;
+	position: fixed;
+	z-index: 10;
 	bottom: 0;
 	left: 0;
 	width: 100%;

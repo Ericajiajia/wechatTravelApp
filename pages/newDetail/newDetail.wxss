@@ -58,9 +58,9 @@
 	height: 120rpx;
 	line-height: 120rpx;
 }
-.detail-time-title, .detail-money-title, .detail-remark-title, .detail-account-title {
-	width: 70rpx;
-	margin-right: 42rpx;
+.detail-time-title, .detail-money-title, .detail-remark-title, .detail-account-title, .detail-upload-title {
+	width: 84rpx;
+	margin-right: 28rpx;
 }
 .detail-account-title {
 	width: 140rpx;
@@ -78,8 +78,10 @@
 	justify-content: space-between;
 }
 .detail-money-block2 {
+	width: 120rpx;
 	height: 120rpx;
 	line-height: 120rpx;
+	text-align: right;
 }
 /* 开关按钮 */
 .detail-account-switch {

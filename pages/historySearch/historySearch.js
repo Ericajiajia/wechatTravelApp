@@ -40,7 +40,7 @@ Page({
 			header: {
 				'content-type': 'application/json'
 			}, 
-			success: function (res) {
+			success: res => {
 				console.log(res.data)
 				// 把账单数据取出来
 				let bills = res.data

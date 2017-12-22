@@ -5,7 +5,7 @@
 			<view class='bill-time'>{{item.time}}</view>
 		</view>
 		<view bindtap="delItem" class="bill-buttons">
-			<view id='{{item.id}}' class="bill-editor" catchtap="billEditor">编辑</view>
+			<navigator id='{{item.id}}' open-type='navigate' url='pages/newAccount/newAccount' class="bill-editor" catchtap="billEditor">编辑</navigator>
 			<view id='{{item.id}}' class="bill-delete" catchtap="billDelete">删除</view>
 		</view>
 	</view> 

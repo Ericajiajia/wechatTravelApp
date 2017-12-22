@@ -10,10 +10,15 @@ page {
 .code-show-icon {
   width: 280rpx;
   height: 280rpx;
+	background: #ffffff;
 }
-.code-info {
+.code-info, .code-error-info {
   margin: 0 auto 60rpx;
   text-align: center;
+}
+.code-error-info {
+  font-size: 32rpx;
+	color: rgb(246, 102, 99);
 }
 .code-info-title {
   font-size: 32rpx;
@@ -27,18 +32,32 @@ page {
   vertical-align: -14%;
 }
 /* 确定按钮 */
-.code-confirm {
+.code-change {
+	margin-bottom: 40rpx;
+}
+.code-confirm, .code-change {
   width: 560rpx;
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 80rpx;
+  line-height: 78rpx;
   padding: 0;
-  border-radius: 45rpx;
+  border-radius: 40rpx;
   text-align: center;
   font-size: 34rpx;
+	border: 2rpx solid rgb(57, 166, 255);
+}
+.code-change {
   color: #ffffff;
   background: rgb(57, 166, 255);
 }
-.code-confirm::after {
+.code-confirm {
+	color: rgb(57, 166, 255);
+  background: rgb(247, 247, 247);
+}
+.forbidden {
+	color: rgb(225, 225, 225);
+	border: 2rpx solid rgb(225, 225, 225);
+}
+.code-confirm::after, .code-change::after {
   border: 0;
 }
 /* info弹窗 */
@@ -81,12 +100,12 @@ page {
   letter-spacing: 3rpx;
 }
 .alert-ans1 {
-  top: 120rpx;
+  top: 110rpx;
   line-height: 42rpx;
   font-size: 26rpx;
 }
 .alert-ans2 {
-  bottom: 130rpx;
+  bottom: 120rpx;
   line-height: 50rpx;
   font-size: 34rpx;
 }

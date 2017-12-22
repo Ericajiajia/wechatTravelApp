@@ -1,14 +1,16 @@
 {
   "pages":[
+		"pages/index/index",
 		"pages/accountDetail/accountDetail",
 		"pages/newAccount/newAccount",
-    "pages/billsPage/billsPage",
+		"pages/billsPage/billsPage",
 		"pages/payerSelect/payerSelect",
 		"pages/payeeSelect/payeeSelect",
 		"pages/historySearch/historySearch",
 		"pages/codeUpload/codeUpload",
 		"pages/accountSummary/accountSummary",
-		"pages/newDetail/newDetail"
+		"pages/newDetail/newDetail",
+		"pages/addToAccount/addToAccount"
   ],
   "window":{
 		"navigationBarBackgroundColor": "#39a6ff",
