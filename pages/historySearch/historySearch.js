@@ -2,31 +2,7 @@ const app = getApp()
 
 Page({
   data: {
-    historyList: [{
-      imageUrl: '',
-      name: '佳佳',
-			done: '增加了一笔账单',
-      sort: '餐饮',
-      price: '324.5'
-    }, {
-        imageUrl: '',
-        name: '佳佳133',
-				done: '删除了一笔账单',
-        sort: '餐饮',
-        price: '43'
-    }, {
-        imageUrl: '',
-        name: '佳佳6776',
-				done: '删除了一笔账单',
-        sort: '餐饮',
-        price: '76456.9'
-		}, {
-				imageUrl: '',
-				name: '不会叫',
-				done: '增加了一笔账单',
-				sort: '餐饮',
-				price: '876.54'
-    }],
+    historyList: [],
     have: 'have',
     none: ''
   },
@@ -54,28 +30,30 @@ Page({
 					// 拿到用户头像和姓名
 					historyPer.imageUrl = that.findUser(bills[i].operatorId, 1)
 					historyPer.name = that.findUser(bills[i].operatorId, 2)
-					historyList[i] = historyPer
+					historyList.push(historyPer)
+					console.log(historyPer, bills[i].id)
 				}
 				that.setData({
 					historyList: historyList
 				})
+				// 判断当前页面是否有数据需要渲染
+				console.log(that.data.historyList)
+				if (that.data.historyList.length == 0 || !that.data.historyList) {
+					that.setData({
+						none: '',
+						have: 'have'
+					})
+				} else {
+					that.setData({
+						none: 'none',
+						have: ''
+					})
+				}
 			},
 			fail: res => {
 				console.log("failed", res)
 			}
 		})
-		// 判断当前页面是否有数据需要渲染
-		if (that.data.historyList.length == 0) {
-			that.setData({
-				none: '',
-				have: 'have'
-			})
-		} else {
-			that.setData({
-				none: 'none',
-				have: ''
-			})
-		}
 	},
 	findUser: function (num, funcnum) {
 		for (let j = 0; j < app.globalData.users.length; j ++) {

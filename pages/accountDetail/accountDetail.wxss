@@ -67,15 +67,22 @@
 	padding: 40rpx 0;
 	text-align: center;
 	background: #ffffff;
-	border-top: 1rpx solid rgba(95, 95, 95, .1);
-	border-bottom: 1rpx solid rgba(95, 95, 95, .1);
+	border-top: 1rpx solid rgba(95, 95, 95, .2);
+	border-bottom: 1rpx solid rgba(95, 95, 95, .2);
 }
 .summoney-title {
+	position: relative;
 	margin: 0 auto;
 	font-size: 34rpx;
 	color: rgb(95, 95, 95);
 }
+.summoney-title-content {
+	position: relative;
+	margin:0 auto;
+	padding-left: 72rpx;
+}
 .summoney-title-info {
+	position: relative;
 	width: 36rpx;
 	height: 36rpx;
 	padding: 15rpx;
@@ -83,14 +90,21 @@
 	vertical-align: -45%;
 }
 .summoney-price {
+	position: relative;
 	margin: 23rpx auto 38rpx;
 	font-size: 26rpx;
 	color: rgb(95, 95, 95);
 }
 .summoney-price-number {
-	margin-right: 10rpx;
+	position:relative;
+	margin:0 auto;
+	padding-left: 36rpx;
 	font-size: 54rpx;
 	color: rgb(57, 166, 255);
+}
+.summoney-price-text {
+	position: relative;
+	margin-left: 10rpx;
 }
 .summoney-add {
 	width: 400rpx;
@@ -117,7 +131,7 @@
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1rpx solid rgba(95, 95, 95, .1);
+	border-bottom: 1rpx solid rgba(95, 95, 95, .2);
 }
 .sort-public-block, .sort-private-block {
 	width: 50%;
@@ -129,7 +143,7 @@
 .sort-public, .sort-private {
 	display: block;
 	width: 100rpx;
-	height: 108rpx;
+	height: 112rpx;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -145,7 +159,7 @@
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 670rpx;
+	width: 90%;
 	margin: 0 auto;
 	padding: 0;
 	height: 130rpx;
@@ -179,26 +193,16 @@
 	width: 430rpx;
 	text-align: left;
 }
-.detail-info, .detail-price {
+.detail-info, .detail-price, .detail-price-private {
 	position: absolute;
 	top: 0;
 	height: 130rpx;
-	font-size: 30rpx;
+	font-size: 28rpx;
 	color: rgb(95, 95, 95);
 	display: inline-flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	flex-direction: column;
-	padding: 25rpx 0;
-	box-sizing: border-box;
-}
-.detail-price-private {
-	position: absolute;
-	top: 0;
-	height: 130rpx;
-	line-height: 130rpx;
-	font-size: 24rpx;
-	color: rgb(95, 95, 95);
-	padding: 0;
+	padding: 29rpx 0 26rpx;
 	box-sizing: border-box;
 }
 .detail-info {
@@ -211,11 +215,15 @@
 }
 .info-sort, .info-time, .price-money, .price-detail {
 	display: inline-block;
-	height: 34rpx;
-	line-height: 34rpx;
 }
-.price-money {
-	font-size: 30rpx;
+.info-time, .price-detail {
+	height: 24rpx;
+	line-height: 24rpx;
+}
+.info-sort, .price-money {
+	margin-bottom: 13rpx;
+	height: 28rpx;
+	line-height: 28rpx;
 }
 .detail-price, .detail-price-private {
 	left: 190rpx;
@@ -378,5 +386,141 @@
 	width: 500rpx;
 	font-size: 34rpx;
 	color: rgb(95, 95, 95);
-	vertical-align: 35%; 
+	vertical-align: 50%; 
+}
+
+/* 分享卡片样式 */
+.share-background {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, .7);
+}
+.backNone, .areaNone, .canvasNone {
+	display: none;
+}
+.share-aream .share-canvas {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+}
+.share-card {
+	position: fixed;
+	width: 500rpx;
+	height: 680rpx;
+	top: 130rpx;
+	left: 50%;
+	margin-left: -250rpx;
+	background: #ffffff;
+	border-radius: 8rpx;
+}
+.canvas {
+	display: block;
+	position: fixed;
+	z-index: 11;
+	top: 130rpx;
+	left: 50%;
+	margin-left: -125px;
+	background: #ffffff;
+	border-radius: 8rpx;
+}
+.card-top {
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 140rpx;
+	border-bottom: 1rpx solid rgba(95, 95, 95, .2);
+}
+.card-top-image-area {
+	position: absolute;
+	left: 30rpx;
+	top: 20rpx;
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+	background: rgb(227, 227, 227);
+}
+.card-top-image {
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%; 
+}
+.card-top-info {
+	position: absolute;
+	top: 23rpx;
+	left: 155rpx;
+	font-size: 34rpx;
+	color: rgb(95, 95, 95);
+}
+.top-info1 {
+	margin: 0;
+	margin-bottom: 8rpx;
+}
+.top-info2 {
+	margin: 0;
+}
+.card-bottom {
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 540rpx;
+}
+.card-bottom-image-area {
+	position: relative;
+	top: 40rpx;
+	left: 50%;
+	margin-left: -145rpx;
+	width: 290rpx;
+	height: 290rpx;
+	background: rgb(227, 227, 227);
+}
+.card-bottom-image {
+	width: 290rpx;
+	height: 290rpx;
+}
+.card-bottom-info {
+	position: absolute;
+	top: 364rpx;
+	left: 0;
+	width: 100%;
+	color: rgb(95, 95, 95);
+	font-size: 28rpx;
+	text-align: center;
+}
+.bottom-info1 {
+	margin-top: 0;
+	font-size: 34rpx;
+}
+.bottom-info2 {
+	margin-top: 22rpx;
+}
+.close-button {
+	position: fixed;
+	top: 850rpx;
+	left: 50%;
+	width: 74rpx;
+	height: 74rpx;
+	margin-left: -37rpx;
+	border-radius: 50%;
+}
+.close-button-image {
+	width: 74rpx;
+	height: 74rpx;
+}
+.share-button {
+	position: fixed;
+	z-index: 11;
+	top: 430px;
+	left: 50%;
+	width: 250px;
+	height: 74rpx;
+	margin-left: -125px;
+	background: rgb(57, 166, 255);
+	color: #ffffff;
+	font-size: 28rpx;
+	text-align: center;
 }

@@ -21,7 +21,8 @@
 		<image class='summoney-title-info' src='../../images/more_info.png' background-size="cover" bindtap='showModal'></image>
 	</view>
 	<view class='summoney-price'>
-		<text class='summoney-price-number'>{{summoney}}</text>人民币
+		<text class='summoney-price-number'>{{summoney}}</text>
+		<text class='summoney-price-text'>元</text>
 	</view>
 	<button class='summoney-add' bindtap='addAccount'>记一笔</button>
 </view>
@@ -55,9 +56,9 @@
 		<!-- 公账四种形式 -->
 		<view class='detail-four-condition'>
 			<button class='detail-button undone' data-id='{{item.id}}' data-listid='{{index}}' wx:if="{{item.visible == 0}}" catchtap='chooseHurry'>催账</button>
-			<button class='detail-button done' wx:elif="{{item.visible == 1}}">已结清</button>
+			<button class='detail-button done' wx:elif="{{item.visible == 1}}" data-id='{{item.id}}' data-listid='{{index}}' catchtap='noHurry'>已结清</button>
 			<view class='detail-favicon' wx:elif="{{item.visible == 2}}">
-				<image class='favicon-image' src='{{item.userImage}}' background-size="cover"></image>
+				<image class='favicon-image' src='{{item.userImage}}' background-size="cover" bindtap='showCard'></image>
 				<view class='favicon-before {{item.beforeRound}}'>已支付</view>
 			</view>
 		</view>
@@ -73,7 +74,8 @@
 				<text class='info-time'>{{item.time}}</text>
 			</view>
 			<view class='detail-price-private'>
-				<text class='price-money'>{{item.price}}</text>人民币
+				<text class='price-money'>{{item.price}}</text>
+				<text class='price-detail'>共1人消费{{item.price}}元</text>
 			</view>
 		</view>
 	</view>
@@ -118,3 +120,37 @@
 			<text class='menu-text'>上传收款码</text>
 		</navigator>
 	</view>
+<!-- 分享出去的卡片 -->
+<view class='share-background {{share.backNone}}' bindtap='closeShare'></view>
+<view class='share-area {{share.areaNone}}'>
+	<view class='share-card'>
+		<view class='card-top'>
+			<view class='card-top-image-area'>
+				<image class='card-top-image' src='{{share.imageUrl}}' background-size="cover"></image>
+			</view>
+			<view class='card-top-info'>
+				<view class='top-info1'>{{share.summary}}　{{share.money}}</view>
+				<view class='top-info2'>向TA支付</view>
+			</view>
+		</view>
+		<view class='card-bottom'>
+			<view class='card-bottom-image-area'>
+				<image class='card-bottom-image' src="{{share.codeUrl}}" data-src="{{share.codeUrl}}" background-size="cover" bindtap='previewImage'></image>
+			</view>
+			<view class='card-bottom-info'>
+				<view class='bottom-info1'>点开图片并长按</view>
+				<view class='bottom-info2'>微信收款码-识别二维码</view>
+				<view class='bottom-info3'>支付宝收款码-保存图片</view>
+			</view>
+		</view>
+	</view>
+	<view class='close-button' bindtap='closeCard'>
+		<image class='close-button-image' src='../../images/card_close.png' background-size='cover'></image>
+	</view>
+</view>
+
+<!-- 待分享的图片 -->
+<view class='share-canvas {{share.canvasNone}}'>
+	<canvas class='canvas' style='width: 250px;height: 340px; background: #ffffff;' canvas-id="firstCanvas"></canvas>
+	<button class='share-button' bindtap='saveCanvas'>分享图片</button>
+</view>

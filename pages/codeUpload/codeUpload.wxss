@@ -54,8 +54,8 @@ page {
   background: rgb(247, 247, 247);
 }
 .forbidden {
-	color: rgb(225, 225, 225);
-	border: 2rpx solid rgb(225, 225, 225);
+	color: rgb(160, 160, 160);
+	border: 2rpx solid rgb(160, 160, 160);
 }
 .code-confirm::after, .code-change::after {
   border: 0;
@@ -75,10 +75,10 @@ page {
 }
 .alert-container {
   position: relative;
-  top: 210rpx;
+  top: 280rpx;
   margin: 0 auto;
   width: 500rpx;
-  height: 450rpx;
+  height: 350rpx;
   background: rgb(247, 247, 247);
   border-radius: 14rpx;
   overflow: hidden;
@@ -100,7 +100,7 @@ page {
   letter-spacing: 3rpx;
 }
 .alert-ans1 {
-  top: 110rpx;
+  top: 120rpx;
   line-height: 42rpx;
   font-size: 26rpx;
 }

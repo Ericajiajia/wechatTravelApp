@@ -1,7 +1,7 @@
 <view class='summary-title'><text class='title-special'>{{user.name}}</text>的<text class='title-special'>{{user.location}}</text>之行</view>
 <!-- 统计图 -->
 <view class='summary-canvas'>
-	<canvas canvas-id='ringCanvas' class='canvas'></canvas>
+	<canvas canvas-id='ringCanvas' class='canvas' wx:if="{{canvasShow}}"></canvas>
 </view>
 <!-- 总花销 -->
 <view class='summary-sum-container'>
@@ -9,7 +9,7 @@
 	<view class='sum-money'>{{summoney}}人民币</view>
 </view>
 <!-- 消费详情 -->
-<view class='summary-detail-container'>
+<view class='summary-detail-container' wx:if="{{canvasShow}}">
 	<view class='detail-title'>消费详情</view>
 	<view class='detail-blocks'>
 		<view class='block' wx:for="{{detail}}" wx:for-index="index" wx:for-item="item">
@@ -17,13 +17,21 @@
 				<image class='block-image' src='{{item.imageUrl}}' background-size="cover"></image>
 			</view>
 			<view class='block-variety'>{{item.variety}}</view>
-			<view class='block-remark'>
-				<scroll-view scroll-x="true" scroll-y="false" style='height: 90rpx;line-height: 90rpx;white-space: nowrap;'>{{item.remark}}
-				</scroll-view>
-			</view>
-			<view class='block-money'>{{item.money}}</view>
+			<view class='block-summoney'>共花费{{item.summoney}}</view>
+			<view class='block-money'>{{item.money}}元</view>
 		</view>
 	</view>
 </view>
 <!-- 生成图片按钮 -->
-<view class='summary-button' bindtap='outputImage'>生成图片</view>
+<view class='summary-button-area'>
+	<button class='summary-button' bindtap='outputImage'>生成图片</button>
+</view>
+
+<view class='share-page' wx:if="{{shareShow}}" disable-scroll="true">
+	<canvas class='canvas1' style='width: 350px;height: 400px; background: #ffffff;' canvas-id="secondCanvas"></canvas>
+	<view class='share-close' bindtap='closeCanvas'>
+		<image class='close-icon' src='../../images/card_close.png' background-size="cover"></image>
+	</view>
+	<button class='share-button1' catchtap='shareCardOut'>分享到朋友圈</button>
+	<button class='share-button2' catchtap='savecard'>保存到本地</button>
+</view>

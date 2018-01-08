@@ -52,3 +52,14 @@
 .bill-delete {
 	background: rgb(246, 102, 99);
 }
+.noneBills {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	color: rgb(160, 160, 160);
+}
+.noneText {
+	display: inline-block;
+	margin: 180rpx auto;
+	font-size: 30rpx;
+}

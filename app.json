@@ -18,5 +18,9 @@
 		"navigationBarTextStyle": "#ffffff",
 		"backgroundTextStyle": "light",
 		"backgroundColor": "#efeff4"
-  }
+  },
+	"networkTimeout": {
+		"request": 10000,
+		"downloadFile": 10000
+	}
 }

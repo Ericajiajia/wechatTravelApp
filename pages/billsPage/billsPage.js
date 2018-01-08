@@ -2,43 +2,7 @@ const app = getApp()
 
 Page({
 	data: {
-		bills: [
-			{
-				location: '上海',
-				time: '2017-01-23',
-				id: 123
-			},
-			{
-				location: '杭州',
-				time: '2017-01-01',
-				id: 456
-			},
-			{
-				location: '苏州',
-				time: '2017-06-14',
-				id: 789
-			},
-			{
-				location: '海南',
-				time: '2017-07-05',
-				id: 3223
-			},
-			{
-				location: '福州',
-				time: '2017-02-27',
-				id: 65446
-			},
-			{
-				location: '北京',
-				time: '2017-04-19',
-				id: 34
-			},
-			{
-				location: '海南',
-				time: '2017-07-05',
-				id: 545
-			}
-		],
+		bills: [''],
 		height: 0,
 		scrollY: true
 	},
@@ -224,6 +188,7 @@ Page({
 	animationMsgWrapItem: function (id, animation) {
 		var index = this.getItemIndex(id)
 		var param = {}
+		console.log('index:', index)
 		var indexString = 'bills[' + index + '].wrapAnimation'
 		param[indexString] = animation.export()
 		this.setData(param)
@@ -233,7 +198,8 @@ Page({
 		var s = this
 		wx.showModal({
 			title: '提示',
-			content: '确定删除该账本吗？', 
+			content: '确定删除该账本吗？',
+			confirmColor: '#39a6ff',
 			success: function (res) {
 				if (res.confirm) {
 					wx.request({
@@ -244,20 +210,75 @@ Page({
 						},
 						success: res => {
 							if (res.statusCode == 200) {
-								var animation = wx.createAnimation({ duration: 200 });
-								animation.height(0).opacity(0).step();
-								this.animationMsgWrapItem(e.currentTarget.id, animation);
+								var animation = wx.createAnimation({ duration: 200 })
+								animation.height(0).opacity(0).step()
+								console.log('id:', e.currentTarget.id)
+								s.animationMsgWrapItem(e.currentTarget.id, animation)
 								setTimeout(function () {
-									var index = s.getItemIndex(e.currentTarget.id);
-									s.data.bills.splice(index, 1);
-									s.setData({ bills: s.data.bills });
-								}, 200);
-								this.showState = 0;
-								this.setData({ scrollY: true })
+									var index = s.getItemIndex(e.currentTarget.id)
+									s.data.bills.splice(index, 1)
+									s.setData({ bills: s.data.bills })
+								}, 100)
+								s.showState = 0
+								s.setData({ scrollY: true })
 								wx.showToast({
 									title: '删除成功！'
 								})
+								if (e.currentTarget.id == app.globalData.accountbookId) {
+
+									wx.request({
+										url: app.globalData.publicPath + '/api/v1/account_books/',
+										method: 'GET',
+										header: {
+											'3rd-session': wx.getStorageSync('session')
+										},
+										success: res => {
+											if (!res.data || res.data.length == 0) {
+												console.log('目前已无账本可以显示！')
+												setTimeout(function () {
+													wx.showModal({
+														title: '前去新建账本！',
+														confirmColor: '#39a6ff',
+														confirmText: '我知道了',
+														showCancel: false,
+														success: function () {
+															// 页面重启动，全部出栈，只留下新页面
+															wx.reLaunch({
+																url: '../../pages/newAccount/newAccount',
+																success: function () {
+																	var pages = getCurrentPages()
+																	console.log(pages)
+																}
+															})
+														}
+													})
+												}, 1800)
+											} else {
+												app.globalData.accountbookId = res.data[res.data.length - 1].id
+												console.log(app.globalData.accountbookId)
+											}
+											console.log(res.data)
+										}
+									})
+								}
+							} else {
+								wx.showModal({
+									title: '提示',
+									content: '删除失败，请重新删除！',
+									confirmColor: '#39a6ff',
+									confirmText: '我知道了',
+									showCancel: false
+								})
 							}
+						},
+						fail: function () {
+							wx.showModal({
+								title: '提示',
+								content: '删除失败，请重新删除！',
+								confirmColor: '#39a6ff',
+								confirmText: '我知道了',
+								showCancel: false
+							})
 						}
 					})
 				} else if (res.cancel) {

@@ -9,13 +9,13 @@
 	<text class='code-error-title'>抱歉！图片上传失败，请重新上传</text>
 </view>
 <button class='code-change' bindtap='changeInfo'>{{codeInfo}}</button>
-<button class='code-confirm' bindtap='codeConfirm'>确定</button>
+<button class='code-confirm' bindtap='codeConfirm' wx:if="{{changeImg}}">确定</button>
+<button class='code-confirm forbidden' wx:else>确定</button>
 <!-- Info提示框 -->
 <view class='alert-background {{show0}}'>
   <view class='alert-container'>
     <text class='alert-question'>Q: 如何上传微信收款码?</text>
     <text class='alert-ans1'>打开微信->点击右上角“+”->收付款->二维码收款->长按保存到相册</text>
-    <text class='alert-ans2'>在小程序首页点击头像就能互相查看收款码啦</text>
     <button class='alert-confirm' bindtap='hideModal'>我知道了</button>
   </view>
 </view>

@@ -23,7 +23,7 @@
 			<text class='sort-image-title {{sort.images[4].imageSpecial}}'>{{sort.images[4].title}}</text>
 		</view> 
 		<view class='sort-image-container' data-menuindex="5" bindtap='changeSort'>
-			<image class='sort-image' src='{{sort.images[5].imageUrl}}' background-size="cover"></image>
+			<image class='sort-image play-special-image' src='{{sort.images[5].imageUrl}}' background-size="cover"></image>
 			<text class='sort-image-title {{sort.images[5].imageSpecial}}'>{{sort.images[5].title}}</text>
 		</view> 
 		<view class='sort-image-container' data-menuindex="6" bindtap='changeSort'>
@@ -35,6 +35,9 @@
 			<text class='sort-image-title'></text>
 		</view> 
 	</view>
+</view>
+<view class='summary-area'>
+	<input class='summary-input' placeholder='{{summaryPlaceHolder}}' placeholder-style='color: rgb(160, 160, 160);' value='{{summaryValue}}' bindinput='getSummary'></input>
 </view>
 <!-- 账单创建时间 -->
 <view class='detail-time-container'>
@@ -49,7 +52,7 @@
 <view class='detail-money-container'>
 	<view class='detail-money-block1' bindtap='moneyFocus'>
 		<view class='detail-money-title' bindtap='moneyFocus'>金额</view>
-		<input class='detail-money' type='digit' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);' value='{{moneyValue}}' bindinput='getmoneyValue'></input>
+		<input class='detail-money' focus='{{moneyfocus}}' placeholder='100.00' placeholder-style='color: rgb(160, 160, 160);' value='{{moneyValue}}' bindinput='getmoneyValue'></input>
 	</view>
 	<view class='detail-money-block2'>人民币</view>
 </view>
@@ -68,33 +71,38 @@
 <!-- 是否公账 -->
 <view class='detail-account-container'>
 	<view class='detail-account-title'>是否公账</view>
-	<switch class='detail-account-switch' checked='{{checked}}' type='switch' bindchange='listenerSwitch'></switch>
+	<switch class='detail-account-switch' checked='{{checked}}' color='rgb(57, 166, 255)' type='switch' bindchange='listenerSwitch'></switch>
 </view>
 <view class='detail-group-container {{groupNone}}'>
 	<!-- 付款人选择，只有一个 -->
 	<view class='detail-host-container' bindtap='payeeChoose'>
 		<view class='detail-host-title'>付款人</view>
-		<view class='detail-host-images' wx:for="{{hostUrl}}" wx:for-item="item">
-			<image class='host-image' src='{{item}}' data-name="{{hostName}}" data-index="{{hostIndex}}"></image>
+		<view class='detail-host-images'>
+			<image class='host-image' src='{{host.hostUrl}}' data-id="{{host.hostId}}" data-index="{{host.hostIndex}}" background-size='cover'></image>
 		</view>
-		<view class='detail-host-icon'>></view>
+		<view class='detail-host-icon'>
+			<image class='host-icon-image' src='../../images/newDetail_payer_choose.png'></image>
+		</view>
 	</view>
 	<!-- 参与人选择，可有多人 -->
 	<view class='detail-guest-container' bindtap='payerChoose'>
 		<view class='detail-guest-title'>参与人</view>
 		<view class='detail-guest-images'>
-			<scroll-view wx:if="{{guestUrl.length > 4}}" scroll-x style="height: 120rpx;white-space: nowrap;display: flex;">
-				<view class='guest-image-con' wx:for="{{guestInfo}}" wx:for-item="item" wx:for-index="index">
-					<image class='guest-image' src='{{item.imageUrl}}' data-name="{{item.userName}}" data-index="{{item.sortNumber}}"></image>
+			<!-- 参与人数大于等于5的时候 -->
+			<view wx:if="{{guest.guestInfo.length > 4}}" style="height: 120rpx;display: flex;justify-content: flex-end;padding-right: 50rpx;box-sizing: border-box;">
+				<view class='guest-image-con1' wx:for="{{guest.guestInfo}}" wx:for-item="item" wx:for-index="index">
+					<image class='guest-image' src='{{item.imageUrl}}' data-id="{{item.userId}}" data-index="{{guest.guestIndex[index]}}" background-size='cover'></image>
 				</view>
-			</scroll-view>
+			</view>
 			<view wx:else style='width: 100%;height: 120rpx;'>
-				<view class='guest-image-con' wx:for="{{guestInfo}}" wx:for-item="item">
-					<image class='guest-image' src='{{item.imageUrl}}' data-name="{{item.userName}}" data-index="{{item.sortNumber}}"></image>
+				<view class='guest-image-con' wx:for="{{guest.guestInfo}}" wx:for-item="item" wx:for-index="index">
+					<image class='guest-image' src='{{item.imageUrl}}' data-id="{{item.userId}}" data-index="{{guest.guestIndex[index]}}" background-size='cover'></image>
 				</view>
 			</view>
 		</view>
-		<view class='detail-guest-icon'>></view>
+		<view class='detail-guest-icon'>
+			<image class='guest-icon-image' src='../../images/newDetail_payer_choose.png'></image>
+		</view>
 	</view>
 </view>
 <!-- 按钮 -->

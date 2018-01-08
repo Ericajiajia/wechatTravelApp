@@ -8,16 +8,6 @@ Page({
 				partner: '',
 				id: '54',
 				name: '风景'
-			},
-			{
-				partner: '',
-				id: '654',
-				name: '丰富'
-			},
-			{
-				partner: '',
-				id: '143',
-				name: '公司'
 			}
 		],
     accountInfo: {place: '上海', date: '2017-11-20'},
@@ -28,31 +18,9 @@ Page({
     show0: 'show0'
   },
   onLoad: function () {
-    wx.getUserInfo({
-      success: res => {
-        app.globalData.userInfo = res.userInfo
-        this.setData({
-          userInfo: res.userInfo
-        })
-        console.log(this.data.userInfo.nickName)
-        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-        // 所以此处加入 callback 以防止这种情况
-        if (app.userInfoReadyCallback) {
-          app.userInfoReadyCallback = res => {
-            this.setData({
-              userInfo: res.userInfo
-            })
-          }
-        }
-      }
-    })
-  },
-  getUserInfo: function (e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo
-    })
+		var pages = getCurrentPages()
+		var options = pages[pages.length - 1].options
+		console.log(options.accountbookId)
   },
   showModal: function () {
     this.setData({

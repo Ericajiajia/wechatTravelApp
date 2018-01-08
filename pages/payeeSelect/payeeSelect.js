@@ -1,71 +1,114 @@
 const app = getApp()
-
 Page({
 	data: {
-		payers: [
-			{
-				userImage: '',
-				userName: '麻雀处处飞1',
-				checkUrl: '../../images/member_no.png',
-				checkBool: true
-			},
-			{
-				userImage: '',
-				userName: '麻雀处处飞2',
-				checkUrl: '../../images/member_no.png',
-				checkBool: false
-			},
-			{
-				userImage: '',
-				userName: '麻雀处处飞3',
-				checkUrl: '../../images/member_no.png',
-				checkBool: false
-			}
+		title: {
+			location: '',
+			time: ''
+		},
+		payees: [
 		],
-		index: 0
+		index: -1
 	},
 	onShow: function () {
 		var pages = getCurrentPages()
-		var prevPage = pages[pages.length - 2]
-		this.checkedFunc(prevPage.data.hostIndex)
+		var prevPage = pages[pages.length - 3]
+		var lastPage = pages[pages.length - 2]
+		let payeesArr = this.getUsers(app.globalData.users)
+		this.setData({
+			title: {
+				location: prevPage.data.title.location,
+				time: prevPage.data.title.time
+			},
+			payees: payeesArr,
+			index: lastPage.data.host.hostIndex
+		})
+		this.checkedFunc(lastPage.data.host.hostIndex)
+	},
+	getUsers: function (data) {
+		if (!data || data.length == 0) {
+			return [{
+				userImage: app.globalData.avatarUrl,
+				userName: app.globalData.nickName,
+				userId: app.globalData.id,
+				checkUrl: '../../images/member_no.png',
+				checkBool: false
+			}]
+		} else {
+			let dataPer = {}, dataArr = []
+			for (let i = 0; i < data.length; i++) {
+				dataPer.userImage = app.globalData.users[i].avatarUrl
+				dataPer.userName = app.globalData.users[i].nickName
+				dataPer.userId = app.globalData.id
+				dataPer.checkUrl = '../../images/member_no.png'
+				dataPer.checkBool = false
+				dataArr.push(dataPer)
+			}
+			console.log('付款人：', dataArr)
+			return dataArr
+		}
 	},
 	checkStatus: function (e) {
-		var i = e.currentTarget.dataset.id
+		var i = e.currentTarget.dataset.index
 		console.log(i)
 		this.setData({
-			index: e.currentTarget.dataset.id
+			index: i
 		})
 		this.checkedFunc(i)
 	},
+	// 这里是只能选择一个，所以最后index值要么不会变化，为-1，要么就一定会有一个值
 	backButton: function () {
 		var pages = getCurrentPages()
 		var prevPage = pages[pages.length - 2]
-		let hostArr = []
-		hostArr.push(this.data.payers[this.data.index].userImage)
-		let hostName = this.data.payers[this.data.index].userName
-		prevPage.setData({
-			hostUrl: hostArr,
-			hostName: hostName,
-			hostIndex: this.data.index
-		})
-		wx.navigateBack({
-			delta: 1
-		})
+		if (this.data.index < 0) {
+			wx.showModal({
+				title: '提示',
+				content: '您还未选择付款人！', 
+				confirmText: '我知道了',
+				confirmColor: '#39a6ff',
+				showCancel: false
+			})
+		} else {
+			let that = this, hostUrl = that.data.payees[this.data.index].userImage
+			let hostId = that.data.payees[that.data.index].userId
+			prevPage.setData({
+				host: {
+					hostUrl: hostUrl,
+					hostId: hostId,
+					hostIndex: that.data.index
+				}
+			})
+			console.log(prevPage.data.host)
+			setTimeout(function () {
+				wx.navigateBack({
+					delta: 1
+				})
+			}, 200)
+		}
 	},
 	checkedFunc: function (i) {
-		for (var j = 0; j < this.data.payers.length; j++) {
+		let that = this
+		for (var j = 0; j < that.data.payees.length; j++) {
 			if (j == i) {
-				this.data.payers[j].checkUrl = '../../images/member_yes.png'
-				this.data.payers[j].checkBool = true
-				this.setData({
-					payers: this.data.payers
+				that.data.payees[j].checkUrl = '../../images/member_yes.png'
+				checkBool = true
+				that.setData({
+					payees: that.data.payees
 				})
 			} else {
-				this.data.payers[j].checkUrl = '../../images/member_no.png'
-				this.data.payers[j].checkBool = false
-				this.setData({
-					payers: this.data.payers
+				that.data.payees[j].checkUrl = '../../images/member_no.png'
+				that.data.payees[j].checkBool = false
+				that.setData({
+					payees: that.data.payees
 				})
+			}
+		}
+	},
+	onShareAppMessage: function (res) {
+		let that = this
+		if (res.from === 'button') {
+			return {
+				title: app.globalData.nickName + '邀请你加入' + that.data.title.location + '(' + that.data.title.time + ')',
+				path: 'pages/addToAccount/addToAccount'
 			}
 		}
 	}
