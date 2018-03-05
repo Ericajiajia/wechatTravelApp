@@ -22,7 +22,8 @@ Page({
 			success: res => {
 				wx.hideLoading()
 				if (!res.data.qrCode) {
-					if (!that.data.iconUrl.match('../../images/picture_upload')) {
+					console.log(that.data.changeImg)
+					if (!that.data.iconUrl.match('images/picture_upload')) {
 						that.setData({
 							codeInfo: '修改二维码',
 							changeImg: true,
@@ -74,7 +75,8 @@ Page({
 				that.setData({
 					iconUrl: tempFilePaths,
 					codeInfo: '修改二维码',
-					changeImg: true
+					changeImg: true,
+					upload: false
 				})
 				console.log(that.data.iconUrl, that.data.changeImg)
 			}
@@ -82,6 +84,7 @@ Page({
 	},
 	uploadImage: function (url) {
 		let that = this
+		console.log(that.data.iconUrl)
 		wx.uploadFile({
 			url: app.globalData.publicPath + "/api/v1/images/qrcodes/",
 			filePath: url,
